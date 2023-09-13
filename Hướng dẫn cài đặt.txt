@@ -1,0 +1,27 @@
+Tổng đài:
+1. Mở Terminal: 
+2. npm i --legacy--peer-deps
+3. npm start
+
+Server socket (start trước DriverApp và CustomerApp)
+1. Mở Terminal: 
+2. npm i --legacy--peer-deps
+3. npm start
+
+Khởi động 2 emulator devices (android)
+vd: emulator-5552 (DriverApp), emulator-5554 (CustomerApp)
+
+DriverApp
+1. check package.json xem dòng npm run driver có id emulator 
+giống với emulator devices đã khởi tạo
+vd: "user": "npx react-native run-android --port 7777(không sửa) --deviceId emulator-5554",
+2. npm i --legacy--peer-deps
+3. npm run driver
+
+CustomerApp
+1. check package.json xem dòng npm run driver có id emulator 
+giống với emulator devices đã khởi tạo
+vd: "user": "npx react-native run-android --port 8888(không sửa) --deviceId emulator-5552",
+2. npm i --legacy--peer-deps
+3. npm run user
+

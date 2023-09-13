@@ -46,10 +46,23 @@ const cancelBooking = (req, res) => {
   // ...
 };
 
+const getRides = async (req, res) => {
+  try {
+    const rides = await callcenterPromises.callGetRides();
+    if (rides.length === 0) {
+      return res.status(404).json({ message: 'Bạn chưa có lịch sử di chuyển.' });
+    }
+    return res.json(rides);
+  } catch (error) {
+    return res.status(500).json({ error: 'Đã xảy ra lỗi khi lấy lịch sử di chuyển tài xế.' });
+  }
+};
+
 module.exports = {
   gpsHistory,
   saveGPS,
   customerAdd,
   createBooking,
   cancelBooking,
+      getRides
 };

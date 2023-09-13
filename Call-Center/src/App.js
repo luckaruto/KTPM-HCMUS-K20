@@ -3,6 +3,7 @@ import "./App.css";
 import handleRequest from "./handleRequest";
 import FormInput from "./components/FormInput";
 import "./components/formInput.css";
+import Table from "./components/TableData/Table";
 
 const App = () => {
   const [formData, setFormData] = useState({
@@ -109,6 +110,7 @@ const App = () => {
           Submit
         </button>
       </form>
+      <Table/>
     </div>
   );
 };

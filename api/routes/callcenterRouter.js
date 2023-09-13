@@ -17,4 +17,7 @@ router.post('/bookings', callcenterController.createBooking);
 // Route để hủy cuốc xe từ CallCenter
 router.post('/bookings/:booking_id/cancel', callcenterController.cancelBooking);
 
+// Route để lấy thông tin toàn bộ cuốc xe từ CallCenter
+router.get('/all-rides', callcenterController.getRides);
+
 module.exports = router;

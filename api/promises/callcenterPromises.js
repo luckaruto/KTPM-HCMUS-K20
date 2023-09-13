@@ -48,8 +48,24 @@ const callAddCustomer = async (ID,  tel, name) => {
   });
 };
 
+const callGetRides = async (driverID) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'SELECT * FROM TAXI.GetRides()',
+      (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results.rows);
+        }
+      }
+    );
+  });
+};
+
 module.exports = {
   gpsHistory,
   saveGPS,
   callAddCustomer,
+  callGetRides,
 };
