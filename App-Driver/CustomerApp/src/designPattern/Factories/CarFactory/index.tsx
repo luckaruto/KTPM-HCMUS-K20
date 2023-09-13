@@ -29,7 +29,7 @@ export class Car implements ICar {
       typeof this.data.pricePerKm === 'number' ? this.data.pricePerKm : 0;
 
     // Calculate the price
-    const totalPrice =Math.ceil( pricePerKm * distance);
+    const totalPrice = Math.ceil(pricePerKm * distance);
 
     // Format the price with commas for thousands separators and add the currency symbol "₫" (VND)
     //
@@ -66,8 +66,8 @@ export class CarFactory {
 
   public factoryMethod(data: UserInformation): Car {
     const priceCarTypes = {
-      [CarType.SEAT_4]: 100,
-      [CarType.SEAT_7]: 200,
+      [CarType.SEAT_4]: 10000,
+      [CarType.SEAT_7]: 14000,
     };
 
     const initData: CarProps = {

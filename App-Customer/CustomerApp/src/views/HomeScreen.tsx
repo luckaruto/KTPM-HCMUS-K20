@@ -102,6 +102,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
     if (step.name == 'cancel trip') {
       navigation.navigate('MapBook');
     }
+    if (step.name == 'bending') {
+      navigation.navigate('MapBook');
+    }
   }, [step]);
 
   return (

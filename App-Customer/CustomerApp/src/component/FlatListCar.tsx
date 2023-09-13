@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Images} from '../configs/images';
 import {Car} from '../designPattern/Factories/CarFactory';
 import {useSelector} from 'react-redux';
@@ -11,6 +11,24 @@ type ItemProps = {car: Car};
 const FlatListCar = ({car}: ItemProps) => {
   const origin = useSelector(selectorigin);
   const destination = useSelector(selectdestination);
+  const [distance, setDistance] = useState<number | null>(null);
+
+  useEffect(() => {
+    // Calculate distance when origin or destination changes
+    const calculateDistance = async () => {
+      try {
+        const distanceValue = await LocationService.calculateDistance(
+          origin.location,
+          destination.location,
+        );
+        setDistance(distanceValue);
+      } catch (error) {
+        console.error('Error calculating distance:', error);
+      }
+    };
+
+    calculateDistance();
+  }, [origin.location, destination.location]);
   return (
     <View className="flex flex-col w-full">
       <View className=" flex flex-row w-full justify-between mt-3 ">
@@ -29,12 +47,7 @@ const FlatListCar = ({car}: ItemProps) => {
         </View>
         <View className="mr-2 flex flex-row items-start justify-end ">
           <Text className="mt-3 text-ellipsis text-[17px] mr-3">
-            {car.countPrice(
-              LocationService.calculateDistance(
-                origin.location,
-                destination.location,
-              ),
-            )}
+            {distance !== null ? car.countPrice(distance) : 'Calculating...'}
           </Text>
         </View>
       </View>

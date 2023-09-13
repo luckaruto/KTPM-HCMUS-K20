@@ -63,8 +63,8 @@ export class SocketIOClient {
     });
   }
 
-  emitGetCustomerLocation() {
-    this.socket.emit(SOCKET.GET_LOCATION_CUSTOMER);
+  emitGetCustomerLocation(data: any) {
+    this.socket.emit(SOCKET.GET_LOCATION_CUSTOMER, data);
   }
   onListenCustomerLocationRequest(callback: (data: any) => void) {
     this.socket.on(SOCKET.GET_LOCATION_CUSTOMER_ARRAY, data => {

@@ -83,7 +83,7 @@ const BookScreen: React.FC<BookScreenProps> = ({navigation}) => {
 
   React.useEffect(() => {
     socket.emitJoinRoom(driverinfo.tel);
-    socket.emitGetCustomerLocation();
+    socket.emitGetCustomerLocation(driverinfo.tel);
     socket.onListenCustomerLocation(data => {
       SetListCustomer(prevListCustomer => {
         // Check if the data already exists in the array
@@ -104,6 +104,26 @@ const BookScreen: React.FC<BookScreenProps> = ({navigation}) => {
     });
   }, []);
 
+  const [distance, setDistance] = useState<number | null>(null);
+
+  useEffect(() => {
+    const calculateDistance = async () => {
+      try {
+        const distanceValue = await LocationService.calculateDistance(
+          selectedId.data.origin.location,
+          selectedId.data.destination.location,
+        );
+        setDistance(distanceValue);
+      } catch (error) {
+        console.error('Error calculating distance:', error);
+      }
+    };
+
+    if (selectedId) {
+      calculateDistance();
+    }
+  }, [selectedId?.data?.origin, selectedId?.data?.destination]);
+
   const AcceptBooking = async () => {
     try {
       dispatch(setLoading(true));
@@ -116,14 +136,12 @@ const BookScreen: React.FC<BookScreenProps> = ({navigation}) => {
         userTel: selectedId?.data.Customer?.id,
         pickupLocation: originCustomer.description,
         dropOffLocation: destinationCustomer.description,
-        price: CarFactory.getInstance()
-          .factoryMethod(driverinfo)
-          .countPrice(
-            LocationService.calculateDistance(
-              originCustomer.location,
-              destinationCustomer.location,
-            ),
-          ),
+        price:
+          distance !== null
+            ? CarFactory.getInstance()
+                .factoryMethod(driverinfo)
+                .countPrice(distance)
+            : 0,
       };
 
       const {message} = await RideService.createRide(dataSubmit);
@@ -195,7 +213,17 @@ const BookScreen: React.FC<BookScreenProps> = ({navigation}) => {
                 title={item?.data.Customer?.name}
                 destination={item?.data.destination?.description}
                 origin={item?.data.origin?.description}
-                price={item?.data.cardetails?.price}
+                price={
+                  distance !== null
+                    ? CarFactory.getInstance()
+                        .factoryMethod(driverinfo)
+                        .countPrice(distance)
+                        .toLocaleString('vi-VN', {
+                          style: 'currency',
+                          currency: 'VND',
+                        })
+                    : 'null'
+                }
               />
             </TouchableOpacity>
           )}

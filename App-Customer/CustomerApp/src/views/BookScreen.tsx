@@ -71,6 +71,7 @@ const BookScreen: React.FC<BookScreenProps> = ({navigation}) => {
       },
     };
     socket.emitSendBooking(data);
+    dispatch(setStep({name: 'bending'}));
     navigation.navigate('MapBook');
   };
 
@@ -129,9 +130,8 @@ const BookScreen: React.FC<BookScreenProps> = ({navigation}) => {
                 <Image className="h-7 w-7" source={Images.wallet} />
                 <Text className="ml-2 text-xg font-bold">Choice Wallet</Text>
               </TouchableOpacity>
-              <TouchableOpacity className="absolute right-3  flex flex-row items-center mt-1">
-                <Image className="h-7 w-7" source={Images.wallet} />
-                <Text className="ml-2 text-xg font-bold">Choice Wallet</Text>
+              <TouchableOpacity className="absolute right-3 justify-center  flex flex-row items-center mt-1">
+                <Text className="ml-2 text-xg font-bold">Choice Voucheur</Text>
               </TouchableOpacity>
               <Divider
                 className="mt-1"

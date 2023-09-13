@@ -70,7 +70,10 @@ const NotifyInformationCustomer = ({
             className="w-[30%] text-center  bg-green-500 h-[80%]"
             onPress={async () => {
               dispatch(setStep({name: 'drop off'}));
-              socket.emitSuccessTrip(telephonenumber);
+              socket.emitSuccessTrip({
+                customerId: telephonenumber,
+                driverId: user.tel,
+              });
               try {
                 const {message} = await RideService.completeRide(rideId);
 
@@ -88,7 +91,10 @@ const NotifyInformationCustomer = ({
             className="w-[30%] text-center  bg-green-500 h-[80%]"
             onPress={() => {
               dispatch(setStep({name: 'pick up'}));
-              socket.emitPickCustomer(telephonenumber);
+              socket.emitPickCustomer({
+                customerId: telephonenumber,
+                driverId: user.tel,
+              });
             }}>
             <Text className="text-white h-full text-xs">pick up</Text>
           </Button>

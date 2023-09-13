@@ -49,6 +49,17 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
     // Check if the user is logged in using the LoginHandler
     !loginHandler.handle() && navigate.replace('Welcome');
   }, []);
+  React.useEffect(() => {
+    if (step.name == 'pick up') {
+      navigation.navigate('MapBook');
+    }
+    if (step.name == 'cancel trip') {
+      navigation.navigate('MapBook');
+    }
+    if (step.name == 'bending') {
+      navigation.navigate('MapBook');
+    }
+  }, [step]);
 
   let watchID: number | null = null;
 
@@ -194,12 +205,21 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           />
         </MapView>
       )}
+      {stateTurnOff && (
+        <View className="bg-[#9b9b9b83] bg-opacity-[100%] h-full w-full"></View>
+      )}
 
       <View className=" top-4 absolute h-[10%] w-[100%] flex items-center mb-[20%] ">
         <View className="w-[90%] flex flex-row items-center justify-end gap-2">
           <Button
             className={` bg-[#2ab54f]`}
             onPress={() => {
+              socket.emitSendUpdateLocation({
+                driverinfo: driverinfo.tel,
+                lat: origin?.location.lat,
+                lng: origin?.location.lng,
+              });
+              setStateTurnOff(false);
               navigate.navigate('Book');
             }}>
             <Text className="text-white text-xs">TurnOn</Text>
@@ -207,6 +227,12 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           <Button
             className=" bg-red-500 "
             onPress={() => {
+              socket.emitSendUpdateLocation({
+                driverinfo: driverinfo.tel,
+                lat: 0,
+                lng: 0,
+              });
+              setStateTurnOff(true);
               console.log(Google_Map_Api_Key);
             }}>
             <Text className="text-white text-xs">TurnOff</Text>

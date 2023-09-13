@@ -77,7 +77,7 @@ const ChoiceOrign = () => {
           enablePoweredByContainer={false}
           fetchDetails={true}
           query={{
-            key: Google_Map_Api_Key,
+            key: 'AIzaSyCOv0UiRLIxv-IbgnzKGZWJu5BBL-R91gg',
             language: 'en',
           }}
           minLength={2}

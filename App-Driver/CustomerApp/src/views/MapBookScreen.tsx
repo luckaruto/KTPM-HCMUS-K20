@@ -42,15 +42,14 @@ const MapBookScreen: React.FC<MapBookScreenProps> = ({navigation}) => {
     if (locationCustomer.Customer?.name) {
       SetNotify(() => ({
         notify: true,
-        name: locationCustomer.Customer.name,
-        telephonenumber: locationCustomer.Customer.id,
+        name: locationCustomer?.Customer.name,
+        telephonenumber: locationCustomer?.Customer.id,
       }));
     }
   }, [locationCustomer]);
 
   React.useEffect(() => {
     socket.onListenCancelFromCustomer(data => {
-      console.log(data);
       dispatch(setStep({name: data}));
       navigation.navigate('Book');
     });

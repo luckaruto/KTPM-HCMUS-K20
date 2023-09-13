@@ -114,7 +114,7 @@ const MapBook = () => {
                   latitude: locationDriver.location.lat,
                   longitude: locationDriver.location.lng,
                 }}
-                apikey="AIzaSyA3I9U2vrkhKwLoziKmNEXbzUcXdXOw630"
+                apikey="AIzaSyCOv0UiRLIxv-IbgnzKGZWJu5BBL-R91gg"
                 strokeWidth={3}
                 strokeColor={myTheme.colors.blue[500]}
               />
@@ -182,7 +182,7 @@ const MapBook = () => {
                   latitude: locationDriver.location.lat,
                   longitude: locationDriver.location.lng,
                 }}
-                apikey="AIzaSyA3I9U2vrkhKwLoziKmNEXbzUcXdXOw630"
+                apikey="AIzaSyCOv0UiRLIxv-IbgnzKGZWJu5BBL-R91gg"
                 strokeWidth={3}
                 strokeColor={myTheme.colors.blue[500]}
               />

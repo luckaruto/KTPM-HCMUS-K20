@@ -98,7 +98,7 @@ const MapBook = () => {
                   latitude: locationCustomer.destination.location.lat,
                   longitude: locationCustomer.destination.location.lng,
                 }}
-                apikey="AIzaSyA3I9U2vrkhKwLoziKmNEXbzUcXdXOw630"
+                apikey="AIzaSyCOv0UiRLIxv-IbgnzKGZWJu5BBL-R91gg"
                 strokeWidth={3}
                 strokeColor={myTheme.colors.blue[500]}
               />
@@ -138,7 +138,7 @@ const MapBook = () => {
                   latitude: locationCustomer.origin.location.lat,
                   longitude: locationCustomer.origin.location.lng,
                 }}
-                apikey="AIzaSyA3I9U2vrkhKwLoziKmNEXbzUcXdXOw630"
+                apikey="AIzaSyCOv0UiRLIxv-IbgnzKGZWJu5BBL-R91gg"
                 strokeWidth={3}
                 strokeColor={myTheme.colors.blue[500]}
               />

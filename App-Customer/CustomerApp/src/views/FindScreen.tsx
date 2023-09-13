@@ -78,7 +78,7 @@ const FindScreen: React.FC<FindScreenProps> = ({navigation}) => {
           enablePoweredByContainer={false}
           fetchDetails={true}
           query={{
-            key: 'AIzaSyA3I9U2vrkhKwLoziKmNEXbzUcXdXOw630',
+            key: 'AIzaSyCOv0UiRLIxv-IbgnzKGZWJu5BBL-R91gg',
             language: 'en',
           }}
           minLength={2}

@@ -25,22 +25,40 @@ export class LocationService {
       );
     });
   };
-  static calculateDistance(origin1: Coordinates, origin2: Coordinates): number {
-    const R = 6371; // Earth's radius in kilometers
-    const dLat = deg2rad(origin2.lat - origin1.lat);
-    const dLon = deg2rad(origin2.lng - origin1.lng);
+  static async calculateDistance(
+    origin: Coordinates,
+    destination: Coordinates,
+  ): Promise<number> {
+    const originLat = origin.lat;
+    const originLng = origin.lng;
+    const destinationLat = destination.lat;
+    const destinationLng = destination.lng;
 
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(deg2rad(origin1.lat)) *
-        Math.cos(deg2rad(origin2.lat)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
+    const originStr = `${originLat},${originLng}`;
+    const destinationStr = `${destinationLat},${destinationLng}`;
 
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c; // Distance in kilometers
+    const apiKey = 'AIzaSyCOv0UiRLIxv-IbgnzKGZWJu5BBL-R91gg'; // Replace with your Google Maps API key
+    const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${originStr}&destination=${destinationStr}&key=${apiKey}`;
 
-    return distance;
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Error getting directions: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.status === 'OK' && data.routes.length > 0) {
+        const distanceInMeters = data.routes[0].legs[0].distance.value;
+        const distanceInKilometers = distanceInMeters / 1000;
+
+        return distanceInKilometers;
+      } else {
+        throw new Error(`Error getting directions: ${data.status}`);
+      }
+    } catch (error) {
+      throw new Error(`Error`);
+    }
   }
 
   // static getWatchLocation = (
