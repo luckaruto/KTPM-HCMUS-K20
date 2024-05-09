@@ -7,5 +7,6 @@
 	
   run app in android: yarn android or react-native run android
 
-Link demo app: 
+Link demo app: https://drive.google.com/drive/folders/1TGZ7_nr7X4D9taF59aCoRYaYNu6G_4Of?usp=share_link
+
 
