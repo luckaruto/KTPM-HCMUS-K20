@@ -1,7 +1,10 @@
 # KTPM-HCMUS-K20
   yarn or npm install
+	
   cd ios && pod install
-  yarn ios or react-native run ios
-  yarn android or react-native run android
+	
+  run app in ios: yarn ios or react-native run ios
+	
+  run app in android: yarn android or react-native run android
 
 
