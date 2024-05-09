@@ -4,5 +4,4 @@
   yarn ios or react-native run ios
   yarn android or react-native run android
 
-some feauture
 
